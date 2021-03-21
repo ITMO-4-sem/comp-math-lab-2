@@ -1,3 +1,0 @@
-class NewtonMethod extends Method {
-
-}
