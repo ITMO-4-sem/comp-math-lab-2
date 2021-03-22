@@ -3,7 +3,7 @@ import {MethodResultTableRow} from "./MethodResultTableRow";
 /**
  *
  */
-export class SimpleIterationMethodResultTableRow extends MethodResultTableRow {
+export class SimpleIterationsMethodResultTableRow extends MethodResultTableRow {
 
     public readonly xn: number;
     public readonly xnNext: number;
@@ -20,4 +20,10 @@ export class SimpleIterationMethodResultTableRow extends MethodResultTableRow {
         this.fXnNext = fXnNext;
         this.differenceAbs = differenceAbs;
     }
+
+
+    [Symbol.iterator](): Iterator<any> {
+        return new Array<any>(this.iterationNumber, this.xn, this.xnNext, this.fiXnNext, this.fXnNext, this.differenceAbs)[Symbol.iterator]();
+    }
+
 }

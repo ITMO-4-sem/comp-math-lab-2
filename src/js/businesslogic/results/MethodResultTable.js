@@ -25,6 +25,15 @@ class MethodResultTable {
         }
         return null;
     }
+    getLastRow() {
+        return this.table[this.table.length - 1];
+    }
+    getNumberOfIterations() {
+        return this.table.length;
+    }
+    [Symbol.iterator]() {
+        return this.table[Symbol.iterator]();
+    }
 }
 exports.MethodResultTable = MethodResultTable;
 //# sourceMappingURL=MethodResultTable.js.map

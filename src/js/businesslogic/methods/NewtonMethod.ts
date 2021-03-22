@@ -6,7 +6,7 @@ import {NewtonMethodResultTable} from "../results/NewtonMethodResultTable";
 /**
  * Метод Ньютона.
  */
-class NewtonMethod implements Method {
+export class NewtonMethod implements Method {
     calculate(input: NewtonMethodInput, funcCont: FunctionContainer): NewtonMethodResultTable {
         throw new Error("No implementation yet.")
         return new NewtonMethodResultTable();

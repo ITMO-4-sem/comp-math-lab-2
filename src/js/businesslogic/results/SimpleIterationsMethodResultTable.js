@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SimpleIterationMethodResultTable = void 0;
+exports.SimpleIterationsMethodResultTable = void 0;
 const MethodResultTable_1 = require("./MethodResultTable");
 /**
  *
  */
-class SimpleIterationMethodResultTable extends MethodResultTable_1.MethodResultTable {
+class SimpleIterationsMethodResultTable extends MethodResultTable_1.MethodResultTable {
     getTable() {
         return super.getTable();
     }
@@ -19,5 +19,5 @@ class SimpleIterationMethodResultTable extends MethodResultTable_1.MethodResultT
         return this.table[this.table.length - 1].fXnNext;
     }
 }
-exports.SimpleIterationMethodResultTable = SimpleIterationMethodResultTable;
-//# sourceMappingURL=SimpleIterationMethodResultTable.js.map
+exports.SimpleIterationsMethodResultTable = SimpleIterationsMethodResultTable;
+//# sourceMappingURL=SimpleIterationsMethodResultTable.js.map

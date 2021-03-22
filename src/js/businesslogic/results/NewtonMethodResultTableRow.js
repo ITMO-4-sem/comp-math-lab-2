@@ -15,6 +15,9 @@ class NewtonMethodResultTableRow extends MethodResultTableRow_1.MethodResultTabl
         this.fXnNext = fXnNext;
         this.differenceAbs = differenceAbs;
     }
+    [Symbol.iterator]() {
+        return new Array(this.iterationNumber, this.xn, this.fXn, this.fFstDerXn, this.xnNext, this.fXnNext, this.differenceAbs)[Symbol.iterator]();
+    }
 }
 exports.NewtonMethodResultTableRow = NewtonMethodResultTableRow;
 //# sourceMappingURL=NewtonMethodResultTableRow.js.map

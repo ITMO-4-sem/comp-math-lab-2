@@ -22,4 +22,10 @@ export class NewtonMethodResultTableRow extends MethodResultTableRow {
         this.fXnNext = fXnNext;
         this.differenceAbs = differenceAbs;
     }
+
+
+    [Symbol.iterator](): Iterator<any> {
+        return new Array<any>(this.iterationNumber, this.xn, this.fXn, this.fFstDerXn, this.xnNext, this.fXnNext, this.differenceAbs)[Symbol.iterator]();
+    }
+
 }
