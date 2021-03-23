@@ -3,10 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
 </head>
 <body>
-<table><thead><tr><th>№ итерации</th><th>a</th><th>b</th><th>x</th><th>F(a)</th><th>F(b)</th><th>F(x)</th><th>|xn - xn-1|</th></tr></thead><tbody><tr><td>0</td><td>-2</td><td>-1</td><td>-1.221</td><td>9.33</td><td>-2.65</td><td>-1.964</td><td>-</td></tr><tr><td>1</td><td>-2</td><td>-1.221</td><td>-1.357</td><td>9.33</td><td>-1.964</td><td>-1.068</td><td>0.135</td></tr><tr><td>2</td><td>-2</td><td>-1.357</td><td>-1.423</td><td>9.33</td><td>-1.068</td><td>-0.486</td><td>0.066</td></tr><tr><td>3</td><td>-2</td><td>-1.423</td><td>-1.451</td><td>9.33</td><td>-0.486</td><td>-0.203</td><td>0.029</td></tr><tr><td>4</td><td>-2</td><td>-1.451</td><td>-1.463</td><td>9.33</td><td>-0.203</td><td>-0.082</td><td>0.012</td></tr><tr><td>5</td><td>-2</td><td>-1.463</td><td>-1.468</td><td>9.33</td><td>-0.082</td><td>-0.033</td><td>0.005</td></tr><tr><td>6</td><td>-2</td><td>-1.468</td><td>-1.47</td><td>9.33</td><td>-0.033</td><td>-0.013</td><td>0.002</td></tr><tr><td>7</td><td>-2</td><td>-1.47</td><td>-1.47</td><td>9.33</td><td>-0.013</td><td>-0.005</td><td>0.001</td></tr><tr><td>8</td><td>-2</td><td>-1.47</td><td>-1. 471</td><td>9.33</td><td>-0.005</td><td>-0.002</td><td>0</td></tr><tr><td>9</td><td>-2</td><td>-1.471</td><td>-1.471</td><td>9.33</td><td>-0.002</td><td>-0.001</td><td>0</td></tr><tr><td>10</td><td>-2</td><td>-1.471</td><td>-1.471</td><td>9.33</td><td>-0.001</td><td>0</td><td>0</td></tr></tbody></table>
+
+<div id="message-block">
+    <p id="message-content">asdasdasd</p>
+</div>
 
 
+<form id="form">
+
+    <div>
+        <label for="function-select">Выберете функцию:</label>
+        <select name="function" id="function-select">
+            <option value="first-function">-2.4 x^3&nbsp +&nbsp 1.27 x^2&nbsp +&nbsp 8.63 x&nbsp +&nbsp2.31</option>
+            <option value="second-function" selected>x^3&nbsp -&nbsp x&nbsp +&nbsp 4</option>
+            <option value="second-function">Third function</option>
+
+        </select>
+    </div>
+    <hr>
+
+    <div>
+        <span>Выберете метод расчета</span>
+        <div>
+            <input id="chords" required value="chords" name="method" type="radio">
+            <label for="chords">Метод хорд</label>
+        </div>
+
+        <div>
+            <input id="newton" value="newton" name="method" type="radio">
+            <label for="newton">Метод Ньютона</label>
+        </div>
+
+        <div>
+            <input id="simple-iterations" value="simple-iterations" name="method" type="radio">
+            <label for="simple-iterations">Метод простых итераций</label>
+        </div>
+    </div>
+
+    <hr>
+
+    <div>
+        <label for="input-a">Начало интервала изоляции ('a'):</label>
+        <input id="input-a" style="margin-left: 7px" name="a" step="any" required placeholder="-2" type="number">
+    </div>
+
+    <div>
+        <label for="b">Конец интервала изоляции ('b'):</label>
+        <input id="b" style="margin-left: 15px" name="b" step="any" required placeholder="-1" type="number">
+    </div>
+
+    <div id="init-approx-group" class="hidden">
+        <label for="init-approx">Начальное приближение:</label>
+        <input id="init-approx" style="margin-left: 59px" name="init-approx" step="any" required placeholder="1"
+               type="number">
+    </div>
+
+    <div>
+        <label for="accuracy">Погрешность:</label>
+        <input id="accuracy" style="margin-left: 151px" name="accuracy" max="0.99" min="0.0000000001" step="any"
+               required placeholder="0.01"
+               type="number">
+    </div>
+
+    <hr>
+
+    <div class="file-group tooltip">
+        <label for="file">Выбрать файл с данными:</label>
+        <span class="tooltiptext">Содержимое файла должно быть в формате: <br> a b [c] e</span>
+        <input id="file" type="file">
+    </div>
+
+    <div>
+        <input class="button" type="submit" value="Дать пендель">
+        <input class="button" type="reset" value="Очистить">
+    </div>
+
+</form>
+
+<div id="table"></div>
+
+
+<script src="build.js"></script>
 </body>
 </html>

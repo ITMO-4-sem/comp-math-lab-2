@@ -7,6 +7,7 @@ module.exports = {
         filename: "build.js"
     },
     devServer: {
-        contentBase: './dist',
+        contentBase: './src',
     },
+    watch: true,
 }

@@ -11,6 +11,12 @@ export default {
     ],
 
     newtonMethodResultTableHeadings: [
+        "№ итерации",
+        "xn",
+        "F(xn)",
+        "F'(xn)",
+        "xn+1",
+        "|xn+1 - xn|",
     ],
 
     simpleIterationsMethodResultTableHeadings: [

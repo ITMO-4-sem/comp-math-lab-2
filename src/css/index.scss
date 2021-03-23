@@ -1,0 +1,165 @@
+$notion-background-color: #2f3437;
+$notion-menu-color: #373c3f;
+$notion-menu-text-color: #adafb1;
+$notion-text-color: #eaebeb;
+
+$site-title-color: #6d9eeb;
+
+
+body {
+  background-color: $notion-background-color;
+  color: $notion-text-color;
+  font-family: 'Nunito', sans-serif;
+}
+
+#form {
+
+  width: 450px;
+
+  & > * {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  & input[type="number"], option {
+    border-radius: 6px;
+    padding: 4px;
+    width: 100px;
+  }
+
+  & input[type="number"] {
+    //color: red;
+    //display: inline-block;
+    //margin-left: auto;
+    //margin-right: 0;
+
+
+    //horiz-align: right;
+
+    //float: left;
+
+  }
+
+  & input:required:valid {
+    border-color: green;
+  }
+
+  & input:invalid {
+    border-color: #ef7d37;
+    //background-color: transparentize(#ff027a, .8) ;
+  }
+
+  & .button {
+    width: auto;
+    padding: 6px;
+    font-weight: bold;
+    border-radius: 6px;
+    background-color: transparent;
+    border-color: $notion-text-color;
+    color: $notion-text-color;
+  }
+
+  & .file-group {
+    margin-top: 30px;
+    padding-bottom: 10px;
+
+  }
+
+}
+
+#message-block {
+  //border: solid #ef7d37;
+  background-color: #dd6f0e;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 2px 2px 6px #ef7d37;
+}
+
+
+.hidden {
+  display: none !important;
+}
+
+
+.fade-out {
+  animation: fadeOut ease 6s;
+  //animation-iteration-count: 1;
+}
+
+@keyframes fadeOut {
+  40% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+
+table {
+}
+
+table, th, td {
+  border: 1px solid $notion-menu-text-color;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 4px;
+  min-width: 70px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted $notion-menu-color; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: $notion-menu-color;
+  color: $notion-text-color;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+

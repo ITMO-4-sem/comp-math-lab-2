@@ -1,0 +1,124 @@
+body {
+  background-color: #2f3437;
+  color: #eaebeb;
+  font-family: "Nunito", sans-serif;
+}
+
+#form {
+  width: 450px;
+}
+#form > * {
+  display: block;
+  margin-bottom: 12px;
+}
+#form input[type=number], #form option {
+  border-radius: 6px;
+  padding: 4px;
+  width: 100px;
+}
+#form input:required:valid {
+  border-color: green;
+}
+#form input:invalid {
+  border-color: #ef7d37;
+}
+#form .button {
+  width: auto;
+  padding: 6px;
+  font-weight: bold;
+  border-radius: 6px;
+  background-color: transparent;
+  border-color: #eaebeb;
+  color: #eaebeb;
+}
+#form .file-group {
+  margin-top: 30px;
+  padding-bottom: 10px;
+}
+
+#message-block {
+  background-color: #dd6f0e;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 2px 2px 6px #ef7d37;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.fade-out {
+  animation: fadeOut ease 6s;
+}
+
+@keyframes fadeOut {
+  40% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+table, th, td {
+  border: 1px solid #adafb1;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 4px;
+  min-width: 70px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted #373c3f;
+  /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #373c3f;
+  color: #eaebeb;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*# sourceMappingURL=index.css.map */

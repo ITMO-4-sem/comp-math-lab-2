@@ -11,7 +11,14 @@ exports.default = {
         "F(x)",
         "|xn - xn-1|",
     ],
-    newtonMethodResultTableHeadings: [],
+    newtonMethodResultTableHeadings: [
+        "№ итерации",
+        "xn",
+        "F(xn)",
+        "F'(xn)",
+        "xn+1",
+        "|xn+1 - xn|",
+    ],
     simpleIterationsMethodResultTableHeadings: [],
 };
 //# sourceMappingURL=tablesheadings.config.js.map
