@@ -6,23 +6,31 @@ import {FunctionContainer} from "./FunctionContainer";
 export class ThirdFunctionContainer implements FunctionContainer {
 
     getFunctionRepresentation(): string {
-        return "third function MMm";
+        return "-2^x - x - 2";
     }
 
     calc(x: number): number {
-        return 0
+        return (
+            - Math.pow(2, x) - x - 2
+        );
     }
 
     calcFirstDerivative(x: number): number {
-        return 0
+        return (
+            - Math.pow(2, x) * Math.log(2) - 1
+        );
     }
 
     calcSecondDerivative(x: number): number {
-        return 0
+        return (
+            Math.pow(2, x) + Math.pow(Math.log(2), 2)
+        )
     }
 
     calcFI(x: number): number {
-        return 0;
+        return (
+            - Math.pow(2, x) - 2
+        );
     }
 
 

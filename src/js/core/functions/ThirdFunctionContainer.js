@@ -6,19 +6,19 @@ exports.ThirdFunctionContainer = void 0;
  */
 class ThirdFunctionContainer {
     getFunctionRepresentation() {
-        return "third function MMm";
+        return "-2^x - x - 2";
     }
     calc(x) {
-        return 0;
+        return (-Math.pow(2, x) - x - 2);
     }
     calcFirstDerivative(x) {
-        return 0;
+        return (-Math.pow(2, x) * Math.log(2) - 1);
     }
     calcSecondDerivative(x) {
-        return 0;
+        return (Math.pow(2, x) + Math.pow(Math.log(2), 2));
     }
     calcFI(x) {
-        return 0;
+        return (-Math.pow(2, x) - 2);
     }
 }
 exports.ThirdFunctionContainer = ThirdFunctionContainer;

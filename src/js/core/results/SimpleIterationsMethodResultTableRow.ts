@@ -9,10 +9,10 @@ export class SimpleIterationsMethodResultTableRow extends MethodResultTableRow {
     public readonly xnNext: number;
     public readonly fiXnNext: number;
     public readonly fXnNext: number;
-    public readonly differenceAbs: number;
+    public readonly differenceAbs: number | null;
 
 
-    constructor(iterationNumber: number, xn: number, xnNext: number, fiXnNext: number, fXnNext: number, differenceAbs: number) {
+    constructor(iterationNumber: number, xn: number, xnNext: number, fiXnNext: number, fXnNext: number, differenceAbs: number | null) {
         super(iterationNumber);
         this.xn = xn;
         this.xnNext = xnNext;

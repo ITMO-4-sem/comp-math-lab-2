@@ -22,7 +22,7 @@ class SecondFunctionContainer {
         return (x * x);
     }
     calcFI(x) {
-        return 0;
+        return 12 / 11 * x - 1 / 11 * Math.pow(x, 3) - 4 / 11;
     }
 }
 exports.SecondFunctionContainer = SecondFunctionContainer;

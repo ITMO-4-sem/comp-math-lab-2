@@ -20,5 +20,11 @@ export default {
     ],
 
     simpleIterationsMethodResultTableHeadings: [
+        "№ итерации",
+        "xn",
+        "xn+1",
+        "Fi(xn+1)",
+        "f(xn+1)",
+        "|xn+1 - xn|",
     ],
 }

@@ -28,8 +28,15 @@ export class FirstFunctionContainer implements FunctionContainer {
     }
 
     calcFI(x: number): number {
-        throw new Error("No impl;")
-        return 0;
+        return (
+            Math.cbrt( 1/2.4 * (  ( 1.27 * Math.pow(x, 2) ) + ( 8.63 * x ) + 2.31) )
+        );
+        // return (
+        //     Math.sqrt( 1/1.27 * ( ( 2.4 * Math.pow(x, 3) ) - ( 8.63 * x ) - 2.31) )
+        // );
+        // return (
+        //     1/8.63 * (2.4 * Math.pow(x, 3) - 1.27 * Math.pow(x, 2) - 2.31)
+        // );
     }
 
 

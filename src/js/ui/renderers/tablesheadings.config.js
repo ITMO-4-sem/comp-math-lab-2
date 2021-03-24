@@ -19,6 +19,13 @@ exports.default = {
         "xn+1",
         "|xn+1 - xn|",
     ],
-    simpleIterationsMethodResultTableHeadings: [],
+    simpleIterationsMethodResultTableHeadings: [
+        "№ итерации",
+        "xn",
+        "xn+1",
+        "Fi(xn+1)",
+        "f(xn+1)",
+        "|xn+1 - xn|",
+    ],
 };
 //# sourceMappingURL=tablesheadings.config.js.map

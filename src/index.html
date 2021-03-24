@@ -22,7 +22,7 @@
             <option value="first-function" selected>-2.4 x^3&nbsp +&nbsp 1.27 x^2&nbsp +&nbsp 8.63 x&nbsp +&nbsp2.31
             </option>
             <option value="second-function">x^3&nbsp -&nbsp x&nbsp +&nbsp 4</option>
-            <option value="second-function">Third function</option>
+            <option value="third-function">- 2^x&nbsp -&nbsp x&nbsp -&nbsp 2</option>
 
         </select>
     </div>
@@ -49,8 +49,8 @@
     <hr>
 
     <div>
-        <label for="input-a">Начало интервала изоляции ('a'):</label>
-        <input value="-2" id="input-a" style="margin-left: 7px" name="a" step="any" required placeholder="-2"
+        <label for="a">Начало интервала изоляции ('a'):</label>
+        <input value="-2" id="a" style="margin-left: 7px" name="a" step="any" required placeholder="-2"
                type="number">
     </div>
 
@@ -69,7 +69,8 @@
         <label for="accuracy">Погрешность:</label>
         <input value="0.01" id="accuracy" style="margin-left: 151px" name="accuracy" max="0.99" min="0.000001"
                step="any"
-               required placeholder="0.01"
+               required
+               placeholder="0.01"
                type="number">
     </div>
 
@@ -78,7 +79,7 @@
     <div class="file-group tooltip">
         <label for="file">Выбрать файл с данными:</label>
         <span class="tooltiptext">Содержимое файла должно быть в формате: <br> a b [c] e</span>
-        <input id="file" type="file">
+        <input id="file" accept=".txt" type="file">
     </div>
 
     <div>
@@ -87,6 +88,7 @@
     </div>
 
 </form>
+
 
 <div id="table-block" class="hidden">
     <div id="draggable-block">
@@ -117,6 +119,6 @@
 </div>
 
 
-<script src="build.js"></script>
+<script src="../dist/build.js"></script>
 </body>
 </html>

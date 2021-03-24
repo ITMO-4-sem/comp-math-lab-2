@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-    // mode: "production",
+    mode: "development",
     entry: "./src/js/index.js",
     output: {
         filename: "build.js"

@@ -8,11 +8,22 @@ import {Method} from "./core/methods/Method";
 import {FunctionContainer} from "./core/functions/FunctionContainer";
 import {MethodResultTable} from "./core/results/MethodResultTable";
 import {MethodInput} from "./core/inputs/MethodInput";
-import {NewtonMethodInput} from "./core/inputs/NewtonMethodInput";
+import {MethodInputWithInitApprox} from "./core/inputs/MethodInputWithInitApprox";
 import {MethodResultTableRenderer} from "./ui/renderers/MethodResultTableRenderer";
 import tablesHeadings from "./ui/renderers/tablesheadings.config";
 
 const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
+
+// @ts-ignore
+const aInput: HTMLInputElement = document.getElementById("a") as HTMLInputElement;
+// @ts-ignore
+const bInput: HTMLInputElement = document.getElementById("b") as HTMLInputElement;
+// @ts-ignore
+const initApproxInput: HTMLInputElement = document.getElementById("init-approx") as HTMLInputElement;
+// @ts-ignore
+const accuracyInput: HTMLInputElement = document.getElementById("accuracy") as HTMLInputElement;
+
+
 // @ts-ignore
 const newtonRadio: HTMLInputElement = document.getElementById("newton") as HTMLInputElement;
 // @ts-ignore
@@ -27,6 +38,9 @@ const tableBlock: HTMLDivElement = document.getElementById("table-block") as HTM
 
 const initApproxGroupBlock: HTMLDivElement = document.getElementById("init-approx-group") as HTMLDivElement;
 
+// @ts-ignore
+const fileInput: HTMLInputElement = document.getElementById("file") as HTMLInputElement;
+
 
 const mainTableX: HTMLTableDataCellElement = document.getElementById("table-main-x") as HTMLTableDataCellElement;
 const mainTableFX: HTMLTableDataCellElement = document.getElementById("table-main-fX") as HTMLTableDataCellElement;
@@ -40,7 +54,7 @@ let yPlotValues: Array<number>;
 
 newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true, true));
 chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false, true));
-simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false, true));
+simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true, true));
 
 // fadeOutElement(messageBlock, 6);
 
@@ -57,8 +71,8 @@ const simpleIterationsMethod: SimpleIterationsMethod = new SimpleIterationsMetho
 
 
 
-
-
+// InClUdE html в самом конце
+includeHTML(); // в html должно быть '<div include-html="./ime.html"></div>  '
 
 
 
@@ -139,8 +153,8 @@ form.addEventListener("submit", (event) => {
     let resultTable: MethodResultTable;
 
     try {
-        if (method instanceof NewtonMethod) {
-            resultTable = method.calculate(new NewtonMethodInput(a, b, initApprox, accuracy), funcCont)
+        if ( ! (method instanceof ChordsMethod) ) {
+            resultTable = method.calculate(new MethodInputWithInitApprox(a, b, initApprox, accuracy), funcCont)
         } else {
             resultTable = method.calculate(new MethodInput(a, b, accuracy), funcCont)
         }
@@ -162,12 +176,14 @@ form.addEventListener("submit", (event) => {
 
         let shift: number = Math.abs(b - a) / 4;
 
-        for (let i = a - shift; i < b + shift; i+=accuracy) {
+        for (let i = a - shift; i < b + shift; i+=0.001) {
             xPlotValues.push(i);
             yPlotValues.push(funcCont.calc(i))
         }
 
         drawPlot();
+
+        fileInput.value = "";
 
     } catch (e) {
         showMessage(e);
@@ -175,6 +191,10 @@ form.addEventListener("submit", (event) => {
     }
 })
 
+//
+fileInput.addEventListener("change", () => {
+    getDataFromFile();
+});
 
 function showMessage(message: string) {
     messageContent.innerText = message;
@@ -194,6 +214,9 @@ function displayInput(element: HTMLElement, display: boolean, isRequired: boolea
     for (let child of element.children) {
         if (child instanceof HTMLInputElement) {
             child.required = (display && isRequired);
+            if (! display) {
+                child.value = "";
+            }
         }
     }
     displayElement(element, display);
@@ -280,3 +303,91 @@ function drawPlot() {
         {displayModeBar: false,
             scrollZoom: true});
 }
+
+function getDataFromFile() {
+    // @ts-ignore
+    if (fileInput == null || fileInput.files.length == 0) {
+        throw Error("No files chosen.");
+    }
+
+    // @ts-ignore
+    let file: File = fileInput.files[0];
+
+    let reader: FileReader = new FileReader();
+
+    reader.readAsText(file);
+
+    reader.onload = () => {
+        let result = (reader.result as string).split(" ");
+        console.log("result splitted = ", result)
+
+        if (result.length < 3 || result.length > 4) {
+            showMessage("File contains Invalid number of parameters.");
+            fadeOutElement(messageBlock, 8);
+
+        } else {
+            for (let num of result) {
+                if ( ! isNumeric(num)) {
+                    showMessage(`Error: '${num}' is not a number.`)
+                    fadeOutElement(messageBlock, 8);
+                    console.log("eror")
+                    return;
+                }
+            }
+
+            chordsRadio.click();
+            aInput.value = parseFloat(result[0]).toString(); // is because isNumeric( '0.01asdasd' ) retutn 'true'
+            bInput.value = parseFloat(result[1]).toString(); // js wtf parseFloat('0.01asdasd') = '0.01'
+            accuracyInput.value = parseFloat(result[2]).toString();
+
+            if ( result.length == 4) {
+                initApproxInput.value = parseFloat(result[2]).toString();
+                accuracyInput.value = parseFloat(result[3]).toString();
+
+                newtonRadio.click();
+            }
+        }
+    }
+
+    reader.onerror = () => {
+        showMessage("Can't read the file.")
+        fadeOutElement(messageBlock, 8);
+    }
+
+}
+
+
+function isNumeric(str: string) {
+     // we only process strings!
+    return !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+}
+
+
+
+function includeHTML() {
+    let z, i, elmnt, file, xhttp;
+    /*loop through a collection of all HTML elements:*/
+    z = document.getElementsByTagName("*");
+    for (i = 0; i < z.length; i++) {
+        elmnt = z[i];
+        /*search for elements with a certain atrribute:*/
+        file = elmnt.getAttribute("include-html");
+        if (file) {
+            /*make an HTTP request using the attribute value as the file name:*/
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    if (this.status == 200) {elmnt.innerHTML = this.responseText;}
+                    if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                    /*remove the attribute, and call this function once more:*/
+                    elmnt.removeAttribute("include-html");
+                    includeHTML();
+                }
+            }
+            xhttp.open("GET", file, true);
+            xhttp.send();
+            /*exit the function:*/
+            return;
+        }
+    }
+};

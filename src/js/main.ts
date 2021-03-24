@@ -10,8 +10,11 @@ import {MethodResultTableRenderer} from "./ui/renderers/MethodResultTableRendere
 import {SecondFunctionContainer} from "./core/functions/SecondFunctionContainer";
 import {NewtonMethod} from "./core/methods/NewtonMethod";
 import {NewtonMethodResultTableRow} from "./core/results/NewtonMethodResultTableRow";
-import {NewtonMethodInput} from "./core/inputs/NewtonMethodInput";
+import {MethodInputWithInitApprox} from "./core/inputs/MethodInputWithInitApprox";
 import {NewtonMethodResultTable} from "./core/results/NewtonMethodResultTable";
+import {SimpleIterationsMethod} from "./core/methods/SimpleIterationsMethod";
+import {SimpleIterationsMethodResultTable} from "./core/results/SimpleIterationsMethodResultTable";
+import {ThirdFunctionContainer} from "./core/functions/ThirdFunctionContainer";
 
 
 console.log("kek");
@@ -20,9 +23,10 @@ console.log("kek");
 
 
 let firstFuncCont: FirstFunctionContainer = new FirstFunctionContainer();
-let secondFuncCont: SecondFunctionContainer = new SecondFunctionContainer();
-let input: MethodInput = new MethodInput(-2, -1, 0.01);
-let newtonInput: NewtonMethodInput = new NewtonMethodInput(-2, -1, -2,0.01);
+let secondFuncCont: SecondFunctionContainer = new SecondFunctionContainer()
+let thirdFuncCont: ThirdFunctionContainer = new ThirdFunctionContainer();
+let input: MethodInput = new MethodInput(-3, -1, 0.001);
+let inputWithInitApprox: MethodInputWithInitApprox = new MethodInputWithInitApprox(-30, 200, -2,0.001);
 
 // let validationResult: ValidationResult = FunctionInputValidator.validate(input,  firstFuncCont);
 // console.log(validationResult);
@@ -30,12 +34,15 @@ let newtonInput: NewtonMethodInput = new NewtonMethodInput(-2, -1, -2,0.01);
 
 let chordsMeth: ChordsMethod = new ChordsMethod();
 let newtonMeth: NewtonMethod = new NewtonMethod();
+let simpleIterationsMeth: SimpleIterationsMethod = new SimpleIterationsMethod();
 
-let chordsMethResultTab: ChordsMethodResultTable = chordsMeth.calculate(input, secondFuncCont);
-let newtonMethResultTab: NewtonMethodResultTable = newtonMeth.calculate(newtonInput, secondFuncCont);
+let chordsMethResultTab: ChordsMethodResultTable = chordsMeth.calculate(input, thirdFuncCont);
+let newtonMethResultTab: NewtonMethodResultTable = newtonMeth.calculate(inputWithInitApprox, thirdFuncCont);
+let simpleIterationsMethResultTab: SimpleIterationsMethodResultTable = simpleIterationsMeth.calculate(inputWithInitApprox, thirdFuncCont);
 
-
-console.log("Newton methods res table : ", newtonMethResultTab);
+console.log("Simple iterations methods res table : ", simpleIterationsMethResultTab);
+console.log(" x = ", simpleIterationsMethResultTab.getFinalX());
+console.log(" x = ", chordsMethResultTab.getFinalX());
 console.log(" x = ", newtonMethResultTab.getFinalX());
 
 console.log("*********************")

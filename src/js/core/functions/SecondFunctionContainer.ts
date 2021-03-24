@@ -33,7 +33,7 @@ export class SecondFunctionContainer implements FunctionContainer {
     }
 
     calcFI(x: number): number {
-        return 0;
+        return 12/11 * x - 1/11 * Math.pow(x, 3) - 4/11;
     }
 
 

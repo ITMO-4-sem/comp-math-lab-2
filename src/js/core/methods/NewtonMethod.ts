@@ -1,5 +1,5 @@
 import {Method} from "./Method";
-import {NewtonMethodInput} from "../inputs/NewtonMethodInput";
+import {MethodInputWithInitApprox} from "../inputs/MethodInputWithInitApprox";
 import {FunctionContainer} from "../functions/FunctionContainer";
 import {NewtonMethodResultTable} from "../results/NewtonMethodResultTable";
 import {ValidationResult} from "../validators/ValidationResult";
@@ -12,7 +12,7 @@ import {NewtonMethodResultTableRow} from "../results/NewtonMethodResultTableRow"
  * Метод Ньютона.
  */
 export class NewtonMethod extends Method {
-    calculate(input: NewtonMethodInput, fc: FunctionContainer): NewtonMethodResultTable {
+    calculate(input: MethodInputWithInitApprox, fc: FunctionContainer): NewtonMethodResultTable {
 
         let inputValidationResult: ValidationResult = FunctionInputValidator.validate(input, fc);
 

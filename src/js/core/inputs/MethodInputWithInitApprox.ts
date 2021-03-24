@@ -3,7 +3,7 @@ import {MethodInput} from "./MethodInput";
 /**
  *
  */
-export class NewtonMethodInput extends MethodInput {
+export class MethodInputWithInitApprox extends MethodInput {
 
     private readonly initialApprox: number;
 
