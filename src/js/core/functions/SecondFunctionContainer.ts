@@ -5,10 +5,7 @@ import {FunctionContainer} from "./FunctionContainer";
  */
 export class SecondFunctionContainer implements FunctionContainer {
 
-    // Взять
-    // функцию с
-    // презентации
-    // Малышевой
+
 
     getFunctionRepresentation(): string {
         return "x^3  -  x  +  4";

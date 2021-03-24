@@ -5,10 +5,6 @@ exports.SecondFunctionContainer = void 0;
  *
  */
 class SecondFunctionContainer {
-    // Взять
-    // функцию с
-    // презентации
-    // Малышевой
     getFunctionRepresentation() {
         return "x^3  -  x  +  4";
     }
