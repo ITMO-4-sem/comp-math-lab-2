@@ -22,12 +22,19 @@ const chordsRadio = document.getElementById("chords");
 const simpleIterationsRadio = document.getElementById("simple-iterations");
 const messageBlock = document.getElementById("message-block");
 const messageContent = document.getElementById("message-content");
-const tableBlock = document.getElementById("table");
+const table = document.getElementById("table-full");
+const tableBlock = document.getElementById("table-block");
 const initApproxGroupBlock = document.getElementById("init-approx-group");
+const mainTableX = document.getElementById("table-main-x");
+const mainTableFX = document.getElementById("table-main-fX");
+const mainTableIterNumber = document.getElementById("table-main-iterations-number");
+const plot = document.getElementById('plot');
+let xPlotValues;
+let yPlotValues;
 newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true, true));
 chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false, true));
 simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false, true));
-fadeOutElement(messageBlock, 6);
+// fadeOutElement(messageBlock, 6);
 const firstFuncCont = new FirstFunctionContainer_1.FirstFunctionContainer();
 const secondFuncCont = new SecondFunctionContainer_1.SecondFunctionContainer();
 const thirdFuncCont = new ThirdFunctionContainer_1.ThirdFunctionContainer();
@@ -102,9 +109,22 @@ form.addEventListener("submit", (event) => {
         else {
             resultTable = method.calculate(new MethodInput_1.MethodInput(a, b, accuracy), funcCont);
         }
+        const decPlacesNumber = accuracy.toString().length - 2;
         console.log(tableHeading);
-        console.log(MethodResultTableRenderer_1.MethodResultTableRenderer.render(resultTable, tableHeading));
-        tableBlock.innerHTML = MethodResultTableRenderer_1.MethodResultTableRenderer.render(resultTable, accuracy.toString().length - 2, tableHeading);
+        console.log(MethodResultTableRenderer_1.MethodResultTableRenderer.render(resultTable, decPlacesNumber, tableHeading));
+        table.innerHTML = MethodResultTableRenderer_1.MethodResultTableRenderer.render(resultTable, accuracy.toString().length - 2, tableHeading);
+        mainTableX.innerText = (+resultTable.getFinalX().toFixed(decPlacesNumber)).toString();
+        mainTableFX.innerText = (+resultTable.getFinalXFunc().toFixed(decPlacesNumber)).toString();
+        mainTableIterNumber.innerText = (+resultTable.getNumberOfIterations().toFixed(decPlacesNumber)).toString();
+        displayElement(tableBlock, true);
+        xPlotValues = [];
+        yPlotValues = [];
+        let shift = Math.abs(b - a) / 4;
+        for (let i = a - shift; i < b + shift; i += accuracy) {
+            xPlotValues.push(i);
+            yPlotValues.push(funcCont.calc(i));
+        }
+        drawPlot();
     }
     catch (e) {
         showMessage(e);
@@ -132,15 +152,70 @@ function displayInput(element, display, isRequired = false) {
     displayElement(element, display);
 }
 function fadeOutElement(element, s = 0) {
+    console.log("hhhhhhhhhhh");
     element.classList.add("fade-out");
     element.style.animation = `fadeOut ease ${s}s`;
     setTimeout(() => {
         element.classList.add("hidden");
         element.classList.remove("fade-out");
+        // element.style.animation = "";
     }, s * 1000);
 }
 function replaceAndReturn(str, from, to) {
     str.replace(from, to);
     return str;
+}
+//Make the DIV element draggable:
+dragElement(document.getElementById("draggable-block"));
+function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById(elmnt.id + "-header")) {
+        /* if present, the header is where you move the DIV from:*/
+        // @ts-ignore
+        document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
+    }
+    else {
+        /* otherwise, move the DIV from anywhere inside the DIV:*/
+        elmnt.onmousedown = dragMouseDown;
+    }
+    // @ts-ignore
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+    }
+    // @ts-ignore
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+    function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+function drawPlot() {
+    // @ts-ignore
+    Plotly.newPlot(plot, [{
+            x: xPlotValues,
+            y: yPlotValues
+        }], {
+        margin: { t: 0 }
+    }, { displayModeBar: false,
+        scrollZoom: true });
 }
 //# sourceMappingURL=index.js.map

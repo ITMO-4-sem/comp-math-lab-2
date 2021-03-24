@@ -44,6 +44,10 @@ body {
   box-shadow: 2px 2px 6px #ef7d37;
 }
 
+#message-content {
+  font-size: 20px;
+}
+
 .hidden {
   display: none !important;
 }
@@ -63,6 +67,10 @@ body {
     opacity: 0.2;
   }
 }
+table {
+  margin-bottom: 10px;
+}
+
 table, th, td {
   border: 1px solid #adafb1;
   border-collapse: collapse;
@@ -73,6 +81,10 @@ td {
   min-width: 70px;
   text-align: center;
   vertical-align: middle;
+}
+
+th {
+  background-color: #373c3f;
 }
 
 /* Tooltip container */
@@ -119,6 +131,26 @@ td {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+
+/* Draggable block ------------------------------------------ */
+#draggable-block {
+  border: 2px solid #373c3f;
+  border-radius: 16px;
+  padding: 8px 16px 16px;
+  box-shadow: 2px 2px 20px 12px #373c3f;
+  position: absolute;
+  z-index: 9;
+  /*background-color: #f1f1f1;*/
+  /*border: 1px solid #d3d3d3;*/
+  text-align: center;
+}
+
+#draggable-block-header {
+  cursor: move;
+  z-index: 10;
+  background-color: #054e8c;
+  color: #adafb1;
 }
 
 /*# sourceMappingURL=index.css.map */
