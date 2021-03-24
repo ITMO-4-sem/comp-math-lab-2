@@ -7,4 +7,4 @@
 - Метод Ньютона
 - Метод простых итераций
 
-Открыть frontend можно по [ссылке](https://itmo-computational-math.github.io/comp-math-lab-2/src/index.html) 
+Открыть frontend можно по [ссылке](https://itmo-computational-math.github.io/comp-math-lab-2/src/) 
