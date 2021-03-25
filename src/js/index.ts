@@ -399,6 +399,7 @@ function isNumeric(str: string) {
 
 
 function includeHTML() {
+    // @ts-ignore
     let z, i, elmnt, file, xhttp;
     /*loop through a collection of all HTML elements:*/
     z = document.getElementsByTagName("*");
@@ -411,9 +412,12 @@ function includeHTML() {
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4) {
-                    if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-                    if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
+                    if (this.status == 200) {// @ts-ignore
+                        elmnt.innerHTML = this.responseText;}
+                    if (this.status == 404) {// @ts-ignore
+                        elmnt.innerHTML = "Page not found.";}
                     /*remove the attribute, and call this function once more:*/
+                    // @ts-ignore
                     elmnt.removeAttribute("include-html");
                     includeHTML();
                 }
