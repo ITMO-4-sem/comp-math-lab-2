@@ -43,6 +43,11 @@ export class SimpleIterationsMethod extends Method {
 
             xn = fiXnPrev;
 
+            if ( xn < input.getA() || xn > input.getB() ) {
+                throw new Error("The iteration process doesn't coverage. Please, specify a different interval [a; b]. " +
+                    "Probably, it's not possible to calculate the root using the 'Method of simple iterations' with the set 'fi' function.")
+            }
+
             fiXn = fc.calcFI(xn);
             fXn = fc.calc(xn);
 
@@ -59,7 +64,7 @@ export class SimpleIterationsMethod extends Method {
                 diffAbs,
             ));
 
-            console.log(`a = ${input.getA()}, b = ${input.getB()}`)
+            // console.log(`a = ${input.getA()}, b = ${input.getB()}`)
 
 
         } while ( ! this.isAccuracyProficient(xn, xnPrev, epsilon));

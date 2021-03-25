@@ -85,7 +85,7 @@ containerBlock.addEventListener("click", () => {
 
 
 form.addEventListener("submit", (event) => {
-    console.log("I am in a form element")
+    // console.log("I am in a form element")
     event.preventDefault();
     const formData = new FormData(form);
 
@@ -157,7 +157,7 @@ form.addEventListener("submit", (event) => {
         }
     }
 
-    console.log("FuncCon:", funcCont.getFunctionRepresentation(), "Methd:", method);
+    // console.log("FuncCon:", funcCont.getFunctionRepresentation(), "Methd:", method);
 
     let resultTable: MethodResultTable;
 
@@ -169,8 +169,8 @@ form.addEventListener("submit", (event) => {
         }
 
         const decPlacesNumber: number = accuracy.toString().length - 2;
-        console.log(tableHeading);
-        console.log(MethodResultTableRenderer.render(resultTable, decPlacesNumber, tableHeading))
+        // console.log(tableHeading);
+        // console.log(MethodResultTableRenderer.render(resultTable, decPlacesNumber, tableHeading))
 
         table.innerHTML = MethodResultTableRenderer.render(resultTable, accuracy.toString().length - 2, tableHeading);
 
@@ -239,7 +239,7 @@ function displayElement(element: HTMLElement, display: boolean) {
 
 function displayInput(element: HTMLElement, display: boolean, isRequired: boolean = false) {
 
-    console.log("-- 1")
+    // console.log("-- 1")
     prepareInputsToDisplay(element, display);
 
     displayElement(element, display);
@@ -353,7 +353,7 @@ function getDataFromFile() {
 
     reader.onload = () => {
         let result = (reader.result as string).split(" ");
-        console.log("result splitted = ", result)
+        // console.log("result splitted = ", result)
 
         if (result.length < 3 || result.length > 4) {
             showMessage("File contains Invalid number of parameters.");

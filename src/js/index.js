@@ -59,7 +59,7 @@ containerBlock.addEventListener("click", () => {
     hideMessage();
 });
 form.addEventListener("submit", (event) => {
-    console.log("I am in a form element");
+    // console.log("I am in a form element")
     event.preventDefault();
     const formData = new FormData(form);
     // @ts-ignore
@@ -118,7 +118,7 @@ form.addEventListener("submit", (event) => {
             break;
         }
     }
-    console.log("FuncCon:", funcCont.getFunctionRepresentation(), "Methd:", method);
+    // console.log("FuncCon:", funcCont.getFunctionRepresentation(), "Methd:", method);
     let resultTable;
     try {
         if (!(method instanceof ChordsMethod_1.ChordsMethod)) {
@@ -128,8 +128,8 @@ form.addEventListener("submit", (event) => {
             resultTable = method.calculate(new MethodInput_1.MethodInput(a, b, accuracy), funcCont);
         }
         const decPlacesNumber = accuracy.toString().length - 2;
-        console.log(tableHeading);
-        console.log(MethodResultTableRenderer_1.MethodResultTableRenderer.render(resultTable, decPlacesNumber, tableHeading));
+        // console.log(tableHeading);
+        // console.log(MethodResultTableRenderer.render(resultTable, decPlacesNumber, tableHeading))
         table.innerHTML = MethodResultTableRenderer_1.MethodResultTableRenderer.render(resultTable, accuracy.toString().length - 2, tableHeading);
         mainTableX.innerText = (+resultTable.getFinalX().toFixed(decPlacesNumber)).toString();
         mainTableFX.innerText = (+resultTable.getFinalXFunc().toFixed(decPlacesNumber)).toString();
@@ -180,7 +180,7 @@ function displayElement(element, display) {
     }
 }
 function displayInput(element, display, isRequired = false) {
-    console.log("-- 1");
+    // console.log("-- 1")
     prepareInputsToDisplay(element, display);
     displayElement(element, display);
 }
@@ -275,7 +275,7 @@ function getDataFromFile() {
     reader.readAsText(file);
     reader.onload = () => {
         let result = reader.result.split(" ");
-        console.log("result splitted = ", result);
+        // console.log("result splitted = ", result)
         if (result.length < 3 || result.length > 4) {
             showMessage("File contains Invalid number of parameters.");
             // fadeOutElement(messageBlock, 8);

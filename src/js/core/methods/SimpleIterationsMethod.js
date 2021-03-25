@@ -28,13 +28,17 @@ class SimpleIterationsMethod extends Method_1.Method {
             xnPrev = xn; // Saves the previous 'xn' value
             fiXnPrev = fc.calcFI(xnPrev);
             xn = fiXnPrev;
+            if (xn < input.getA() || xn > input.getB()) {
+                throw new Error("The iteration process doesn't coverage. Please, specify a different interval [a; b]. " +
+                    "Probably, it's not possible to calculate the root using the 'Method of simple iterations' with the set 'fi' function.");
+            }
             fiXn = fc.calcFI(xn);
             fXn = fc.calc(xn);
             if (xn != null && xnPrev != null) {
                 diffAbs = Math.abs(xn - xnPrev);
             }
             resultTable.addRow(new SimpleIterationsMethodResultTableRow_1.SimpleIterationsMethodResultTableRow(iterationNumber, xnPrev, xn, fiXn, fXn, diffAbs));
-            console.log(`a = ${input.getA()}, b = ${input.getB()}`);
+            // console.log(`a = ${input.getA()}, b = ${input.getB()}`)
         } while (!this.isAccuracyProficient(xn, xnPrev, epsilon));
         return resultTable;
     }
