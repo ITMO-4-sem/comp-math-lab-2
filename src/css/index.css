@@ -11,6 +11,9 @@ body {
   display: block;
   margin-bottom: 12px;
 }
+#form .hidden {
+  display: none;
+}
 #form input[type=number], #form option {
   border-radius: 6px;
   padding: 4px;
@@ -37,11 +40,29 @@ body {
 }
 
 #message-block {
-  background-color: #dd6f0e;
+  background-color: #c37315;
   margin-bottom: 16px;
   border-radius: 6px;
   padding: 8px;
   box-shadow: 2px 2px 6px #ef7d37;
+  position: absolute;
+  width: 100%;
+}
+#message-block:not(.hidden) {
+  top: 6px;
+  transition-duration: 0.7s;
+  transition-timing-function: ease-out;
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-iteration-count: 2;
+  animation-delay: 0.5s;
+  animation-timing-function: linear;
+}
+#message-block.hidden {
+  display: block;
+  top: -200px;
+  transition-duration: 1.2s;
+  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 #message-content {
@@ -49,7 +70,7 @@ body {
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 .fade-out {
@@ -60,15 +81,26 @@ body {
   40% {
     opacity: 1;
   }
-  85% {
-    opacity: 0.2;
-  }
   100% {
-    opacity: 0.2;
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  0% {
+    background-color: #c37315;
+  }
+  50% {
+    background-color: #e99736;
+  }
+  110% {
+    background-color: #c37315;
   }
 }
 table {
   margin-bottom: 10px;
+}
+table:first-child {
+  margin-top: 6px;
 }
 
 table, th, td {

@@ -5,6 +5,8 @@ $notion-text-color: #eaebeb;
 
 $site-title-color: #6d9eeb;
 
+$message-block-background-color: #c37315;
+
 
 body {
   background-color: $notion-background-color;
@@ -20,6 +22,10 @@ body {
   & > * {
     display: block;
     margin-bottom: 12px;
+  }
+
+  .hidden {
+    display: none;
   }
 
   & input[type="number"], option {
@@ -70,20 +76,49 @@ body {
 
 #message-block {
   //border: solid #ef7d37;
-  background-color: #dd6f0e;
+  background-color: $message-block-background-color;
   margin-bottom: 16px;
   border-radius: 6px;
   padding: 8px;
   box-shadow: 2px 2px 6px #ef7d37;
+
+  position: absolute;
+  width: 100%;
+
+
+  &:not(.hidden) { // is separated to restart animation when 'hidden' class is removed. Otherwise the 'animation-iteration-count' wont become '0' again.
+
+    top: 6px;
+
+    transition-duration: 0.7s;
+    transition-timing-function: ease-out;
+
+    animation-name: blink;
+    animation-duration: 2s;
+    animation-iteration-count: 2;
+    animation-delay: 0.5s;
+    animation-timing-function: linear;
+    
+
+  }
+
+  &.hidden {
+    display: block;
+    top: -200px;
+
+    //transition-delay: 200ms;
+    transition-duration: 1.2s;
+    transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);;
+
+  }
 }
 
 #message-content {
   font-size: 20px;
 }
 
-
 .hidden {
-  display: none !important;
+  display: none;
 }
 
 
@@ -96,17 +131,29 @@ body {
   40% {
     opacity: 1;
   }
-  85% {
-    opacity: 0.2;
-  }
   100% {
-    opacity: 0.2;
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  0% {
+    background-color: $message-block-background-color;
+  }
+  50% {
+    background-color: lighten($message-block-background-color, 14%);
+  }
+  110% {
+    background-color: $message-block-background-color;
   }
 }
 
 table {
   margin-bottom: 10px;
 
+  &:first-child {
+    margin-top: 6px;
+  }
 }
 
 table, th, td {
@@ -124,7 +171,6 @@ td {
 th {
   background-color: $notion-menu-color;
 }
-
 
 
 /* Tooltip container */

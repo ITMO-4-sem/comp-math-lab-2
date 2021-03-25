@@ -12,6 +12,8 @@ import {MethodInputWithInitApprox} from "./core/inputs/MethodInputWithInitApprox
 import {MethodResultTableRenderer} from "./ui/renderers/MethodResultTableRenderer";
 import tablesHeadings from "./ui/renderers/tablesheadings.config";
 
+console.log("build.js mounted")
+
 const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
 
 // @ts-ignore
@@ -37,6 +39,8 @@ const table: HTMLDivElement = document.getElementById("table-full") as HTMLDivEl
 const tableBlock: HTMLDivElement = document.getElementById("table-block") as HTMLDivElement;
 
 const initApproxGroupBlock: HTMLDivElement = document.getElementById("init-approx-group") as HTMLDivElement;
+
+const containerBlock: HTMLDivElement = document.getElementById("container") as HTMLDivElement;
 
 // @ts-ignore
 const fileInput: HTMLInputElement = document.getElementById("file") as HTMLInputElement;
@@ -75,8 +79,13 @@ const simpleIterationsMethod: SimpleIterationsMethod = new SimpleIterationsMetho
 includeHTML(); // в html должно быть '<div include-html="./ime.html"></div>  '
 
 
+containerBlock.addEventListener("click", () => {
+   hideMessage();
+});
+
 
 form.addEventListener("submit", (event) => {
+    console.log("I am in a form element")
     event.preventDefault();
     const formData = new FormData(form);
 
@@ -186,8 +195,9 @@ form.addEventListener("submit", (event) => {
         fileInput.value = "";
 
     } catch (e) {
+        console.log('errr')
         showMessage(e);
-        fadeOutElement(messageBlock, 12);
+        // fadeOutElement(messageBlock, 12);
     }
 })
 
@@ -196,10 +206,28 @@ fileInput.addEventListener("change", () => {
     getDataFromFile();
 });
 
+
 function showMessage(message: string) {
-    messageContent.innerText = message;
+    setMessage(message);
     displayElement(messageBlock, true);
 }
+
+function hideMessage() {
+    displayElement(messageBlock, false);
+
+    // setTimeout( () => {
+    //     clearMessage();
+    // }, 4000)
+}
+
+function clearMessage() {
+    setMessage("");
+}
+
+function setMessage(message: string) {
+    messageContent.innerText = message;
+}
+
 
 function displayElement(element: HTMLElement, display: boolean) {
     if (display) {
@@ -211,34 +239,40 @@ function displayElement(element: HTMLElement, display: boolean) {
 
 function displayInput(element: HTMLElement, display: boolean, isRequired: boolean = false) {
 
-    for (let child of element.children) {
-        if (child instanceof HTMLInputElement) {
-            child.required = (display && isRequired);
-            if (! display) {
-                child.value = "";
-            }
-        }
-    }
+    console.log("-- 1")
+    prepareInputsToDisplay(element, display);
+
     displayElement(element, display);
 
+}
 
+function prepareInputsToDisplay(element: Element, display: boolean) {
+
+    if (element instanceof HTMLInputElement) {
+        element.disabled = ! display; // to prevent hiding a 'required' input. -- user won't be able to submit a form.
+        return;
+    }
+
+    for (let child of element.children) {
+        prepareInputsToDisplay(child, display);
+    }
 }
 
 
-function fadeOutElement(element: HTMLElement, s: number = 0) {
-
-    console.log("hhhhhhhhhhh")
-    element.classList.add("fade-out");
-    element.style.animation = `fadeOut ease ${s}s`
-    setTimeout(() => {
-        element.classList.add("hidden");
-        element.classList.remove("fade-out");
-        // element.style.animation = "";
-
-
-    }, s * 1000)
-
-}
+// function fadeOutElement(element: HTMLElement, s: number = 0) {
+//
+//     console.log("hhhhhhhhhhh")
+//     element.classList.add("fade-out");
+//     element.style.animation = `fadeOut ease ${s}s`
+//     setTimeout(() => {
+//         element.classList.add("hidden");
+//         element.classList.remove("fade-out");
+//         // element.style.animation = "";
+//
+//
+//     }, s * 1000)
+//
+// }
 
 function replaceAndReturn(str: string, from: string, to: string) {
     str.replace(from, to);
@@ -323,13 +357,13 @@ function getDataFromFile() {
 
         if (result.length < 3 || result.length > 4) {
             showMessage("File contains Invalid number of parameters.");
-            fadeOutElement(messageBlock, 8);
+            // fadeOutElement(messageBlock, 8);
 
         } else {
             for (let num of result) {
                 if ( ! isNumeric(num)) {
                     showMessage(`Error: '${num}' is not a number.`)
-                    fadeOutElement(messageBlock, 8);
+                    // fadeOutElement(messageBlock, 8);
                     console.log("eror")
                     return;
                 }
@@ -351,7 +385,7 @@ function getDataFromFile() {
 
     reader.onerror = () => {
         showMessage("Can't read the file.")
-        fadeOutElement(messageBlock, 8);
+        // fadeOutElement(messageBlock, 8);
     }
 
 }
