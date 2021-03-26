@@ -56,9 +56,9 @@ const plot: HTMLDivElement = document.getElementById('plot') as HTMLDivElement;
 let xPlotValues: Array<number>;
 let yPlotValues: Array<number>;
 
-newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true, true));
-chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false, true));
-simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true, true));
+newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
+chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
+simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
 
 // fadeOutElement(messageBlock, 6);
 
@@ -237,7 +237,7 @@ function displayElement(element: HTMLElement, display: boolean) {
     }
 }
 
-function displayInput(element: HTMLElement, display: boolean, isRequired: boolean = false) {
+function displayInput(element: HTMLElement, display: boolean) {
 
     // console.log("-- 1")
     prepareInputsToDisplay(element, display);
@@ -250,6 +250,7 @@ function prepareInputsToDisplay(element: Element, display: boolean) {
 
     if (element instanceof HTMLInputElement) {
         element.disabled = ! display; // to prevent hiding a 'required' input. -- user won't be able to submit a form.
+        element.value = "";
         return;
     }
 

@@ -43,9 +43,9 @@ const mainTableIterNumber = document.getElementById("table-main-iterations-numbe
 const plot = document.getElementById('plot');
 let xPlotValues;
 let yPlotValues;
-newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true, true));
-chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false, true));
-simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true, true));
+newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
+chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
+simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
 // fadeOutElement(messageBlock, 6);
 const firstFuncCont = new FirstFunctionContainer_1.FirstFunctionContainer();
 const secondFuncCont = new SecondFunctionContainer_1.SecondFunctionContainer();
@@ -179,7 +179,7 @@ function displayElement(element, display) {
         element.classList.add("hidden");
     }
 }
-function displayInput(element, display, isRequired = false) {
+function displayInput(element, display) {
     // console.log("-- 1")
     prepareInputsToDisplay(element, display);
     displayElement(element, display);
@@ -187,6 +187,7 @@ function displayInput(element, display, isRequired = false) {
 function prepareInputsToDisplay(element, display) {
     if (element instanceof HTMLInputElement) {
         element.disabled = !display; // to prevent hiding a 'required' input. -- user won't be able to submit a form.
+        element.value = "";
         return;
     }
     for (let child of element.children) {

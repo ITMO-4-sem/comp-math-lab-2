@@ -23,8 +23,8 @@ exports.default = {
         "№ итерации",
         "xn",
         "xn+1",
-        "Fi(xn+1)",
-        "f(xn+1)",
+        "Fi(xn)",
+        "f(xn)",
         "|xn+1 - xn|",
     ],
 };

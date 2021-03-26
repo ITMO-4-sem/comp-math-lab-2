@@ -73,8 +73,4 @@ export class ChordsMethod extends Method {
 
         return resultTable;
     }
-
-
-
-
 }
