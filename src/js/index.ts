@@ -16,6 +16,8 @@ console.log("build.js mounted")
 
 const form: HTMLFormElement = document.getElementById("form") as HTMLFormElement;
 
+const functionSelect: HTMLSelectElement = document.getElementById("function-select") as HTMLSelectElement;
+
 // @ts-ignore
 const aInput: HTMLInputElement = document.getElementById("a") as HTMLInputElement;
 // @ts-ignore
@@ -60,6 +62,39 @@ newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, t
 chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
 simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
 
+
+functionSelect.addEventListener("change", (e) => {
+    let funcCont;
+    xPlotValues = [];
+    yPlotValues = [];
+
+    switch (functionSelect.value) {
+        case "first-function": {
+            funcCont = firstFuncCont;
+            break;
+        }
+        case "second-function": {
+            funcCont = secondFuncCont;
+            break;
+        }
+        case "third-function": {
+            funcCont = thirdFuncCont;
+            break;
+        }
+        default: {
+            funcCont = firstFuncCont;
+            break;
+        }
+    }
+
+    for (let i = -4; i < 4; i+=0.001) {
+        xPlotValues.push(i);
+        yPlotValues.push(funcCont.calc(i))
+    }
+
+    drawPlot();
+
+})
 // fadeOutElement(messageBlock, 6);
 
 
@@ -122,7 +157,8 @@ form.addEventListener("submit", (event) => {
             break;
         }
         default: {
-            funcCont = firstFuncCont;
+            return;
+            // funcCont = firstFuncCont;
             break;
         }
     }
@@ -178,7 +214,7 @@ form.addEventListener("submit", (event) => {
         mainTableFX.innerText = (+resultTable.getFinalXFunc().toFixed(decPlacesNumber)).toString();
         mainTableIterNumber.innerText = (+resultTable.getNumberOfIterations().toFixed(decPlacesNumber)).toString();
 
-        displayElement(tableBlock, true);
+        // displayElement(tableBlock, true);
 
         xPlotValues = [];
         yPlotValues = [];

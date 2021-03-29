@@ -17,12 +17,15 @@
 
 
 <div id="container">
+
+
     <form id="form">
 
         <div>
             <label for="function-select">Выберете функцию:</label>
             <select name="function" id="function-select">
-                <option value="first-function" selected>-2.4 x^3&nbsp +&nbsp 1.27 x^2&nbsp +&nbsp 8.63 x&nbsp +&nbsp2.31
+                <option value="" selected hidden>Выберете функцию</option>
+                <option value="first-function">-2.4 x^3&nbsp +&nbsp 1.27 x^2&nbsp +&nbsp 8.63 x&nbsp +&nbsp2.31
                 </option>
                 <option value="second-function">x^3&nbsp -&nbsp x&nbsp +&nbsp 4</option>
                 <option value="third-function">- 2^x&nbsp -&nbsp x&nbsp -&nbsp 2</option>
@@ -118,7 +121,7 @@
     </form>
 
 
-    <div id="table-block" class="hidden">
+    <div id="table-block" class="">
         <div id="draggable-block">
             <div id="draggable-block-header">Переместить</div>
             <div id="table-main">
@@ -139,12 +142,15 @@
                     </tbody>
                 </table>
             </div>
-            <div id="table-full"></div>
+
             <p>График:</p>
             <div id="plot" style="width:700px;height:400px;"></div>
 
+            <div id="table-full"></div>
+
         </div>
     </div>
+
 </div>
 
 

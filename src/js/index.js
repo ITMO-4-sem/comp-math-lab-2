@@ -15,6 +15,7 @@ const MethodResultTableRenderer_1 = require("./ui/renderers/MethodResultTableRen
 const tablesheadings_config_1 = __importDefault(require("./ui/renderers/tablesheadings.config"));
 console.log("build.js mounted");
 const form = document.getElementById("form");
+const functionSelect = document.getElementById("function-select");
 // @ts-ignore
 const aInput = document.getElementById("a");
 // @ts-ignore
@@ -46,6 +47,34 @@ let yPlotValues;
 newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
 chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
 simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
+functionSelect.addEventListener("change", (e) => {
+    let funcCont;
+    xPlotValues = [];
+    yPlotValues = [];
+    switch (functionSelect.value) {
+        case "first-function": {
+            funcCont = firstFuncCont;
+            break;
+        }
+        case "second-function": {
+            funcCont = secondFuncCont;
+            break;
+        }
+        case "third-function": {
+            funcCont = thirdFuncCont;
+            break;
+        }
+        default: {
+            funcCont = firstFuncCont;
+            break;
+        }
+    }
+    for (let i = -4; i < 4; i += 0.001) {
+        xPlotValues.push(i);
+        yPlotValues.push(funcCont.calc(i));
+    }
+    drawPlot();
+});
 // fadeOutElement(messageBlock, 6);
 const firstFuncCont = new FirstFunctionContainer_1.FirstFunctionContainer();
 const secondFuncCont = new SecondFunctionContainer_1.SecondFunctionContainer();
@@ -88,7 +117,8 @@ form.addEventListener("submit", (event) => {
             break;
         }
         default: {
-            funcCont = firstFuncCont;
+            return;
+            // funcCont = firstFuncCont;
             break;
         }
     }
@@ -134,7 +164,7 @@ form.addEventListener("submit", (event) => {
         mainTableX.innerText = (+resultTable.getFinalX().toFixed(decPlacesNumber)).toString();
         mainTableFX.innerText = (+resultTable.getFinalXFunc().toFixed(decPlacesNumber)).toString();
         mainTableIterNumber.innerText = (+resultTable.getNumberOfIterations().toFixed(decPlacesNumber)).toString();
-        displayElement(tableBlock, true);
+        // displayElement(tableBlock, true);
         xPlotValues = [];
         yPlotValues = [];
         let shift = Math.abs(b - a) / 4;
