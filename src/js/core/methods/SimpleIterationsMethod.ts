@@ -44,8 +44,10 @@ export class SimpleIterationsMethod extends Method {
             xn = fiXnPrev;
 
             if ( xn < input.getA() || xn > input.getB() ) {
-                throw new Error("The iteration process doesn't coverage. Please, specify a different interval [a; b]. " +
-                    "Probably, it's not possible to calculate the root using the 'Method of simple iterations' with the set 'fi' function.")
+                // "The iteration process doesn't coverage. Please, specify a different interval [a; b]. " +
+                //                     "Probably, it's not possible to calculate the root using the 'Method of simple iterations' with the set 'fi' function."
+                throw new Error("Итерационный процесс не сходится. Пожалуйста, укажите другой интервал [a; b]. " +
+                    "Возможно, невозможно найти корень методом 'Простых итераций' с выбранной функцией 'fi'.")
             }
 
             fiXn = fc.calcFI(xn);

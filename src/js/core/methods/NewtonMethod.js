@@ -29,6 +29,9 @@ class NewtonMethod extends Method_1.Method {
             fXnPrev = fc.calc(xnPrev);
             fXnPrevFirstDer = fc.calcFirstDerivative(xnPrev);
             xn = xnPrev - fXnPrev / fXnPrevFirstDer;
+            if (xn < input.getA() || xn > input.getB()) {
+                throw new Error("Итерационный процесс не сходится. Пожалуйста, укажите другое начальное приближение.");
+            }
             fXn = fc.calc(xn);
             if (xn != null && xnPrev != null) {
                 diffAbs = Math.abs(xn - xnPrev);

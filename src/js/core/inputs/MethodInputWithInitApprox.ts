@@ -12,7 +12,8 @@ export class MethodInputWithInitApprox extends MethodInput {
         super(a, b, accuracy);
 
         if ( (initialApprox < a) || (initialApprox > b) )
-            throw new Error("'Initial approximation' must be between the 'a', a left border, and the 'b', a right border.");
+            // 'Initial approximation' must be between the 'a', a left border, and the 'b', a right border.
+            throw new Error("'Начальное приближение' должно быть между 'a', левой границей, и 'b', правой границей.");
 
         this.initialApprox = initialApprox;
     }

@@ -43,7 +43,8 @@ class ChordsMethod extends Method_1.Method {
                 a = xn;
             }
             else {
-                throw new Error(`Function has the same signs on the ends of both intervals: '[${a}; ${xn}]' and '[${xn}; ${b}]'. Most probably there is no or more then one root in these intervals.`);
+                // `Function has the same signs on the ends of both intervals: '[${a}; ${xn}]' and '[${xn}; ${b}]'. Most probably there is no or more then one root in these intervals.`
+                throw new Error(`Функция сохраняет знаки на концах интервалов: '[${a}; ${xn}]' и '[${xn}; ${b}]'. Скорее всего на этом интервале нет корней или их количество четное .`);
             }
         } while (!this.isAccuracyProficient(xn, xnPrev, epsilon));
         return resultTable;

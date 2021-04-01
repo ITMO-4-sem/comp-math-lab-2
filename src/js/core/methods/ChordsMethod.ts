@@ -65,7 +65,8 @@ export class ChordsMethod extends Method {
             } else if (fc.calc(xn) * fc.calc(b) < 0 ) { // Function has different signs on the interval [xn; b]
                 a = xn;
             } else {
-                throw new Error(`Function has the same signs on the ends of both intervals: '[${a}; ${xn}]' and '[${xn}; ${b}]'. Most probably there is no or more then one root in these intervals.`);
+                // `Function has the same signs on the ends of both intervals: '[${a}; ${xn}]' and '[${xn}; ${b}]'. Most probably there is no or more then one root in these intervals.`
+                throw new Error(`Функция сохраняет знаки на концах интервалов: '[${a}; ${xn}]' и '[${xn}; ${b}]'. Скорее всего на этом интервале нет корней или их количество четное .`);
             }
 
         } while ( ! this.isAccuracyProficient(xn, xnPrev, epsilon));

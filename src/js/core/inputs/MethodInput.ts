@@ -13,10 +13,12 @@ export class MethodInput {
     constructor(a: number, b: number, accuracy: number = MethodInput.ACCURACY_DEFAULT) {
 
         if (a >= b)
-            throw new Error("The 'a', a left border must be to the left of the 'b', a right border.");
+            // The 'a', a left border must be to the left of the 'b', a right border.
+            throw new Error("'a', левая граница, должна быть левее 'b', правой границы.");
 
         if (accuracy > 1) {
-            throw new Error("Accuracy (epsilon) must be below 1.")
+            // Accuracy (epsilon) must be below 1.
+            throw new Error("Погрешность (эпсилон) должна быть меньше 1.")
         }
 
         this.a = a;
