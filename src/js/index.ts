@@ -23,7 +23,7 @@ const aInput: HTMLInputElement = document.getElementById("a") as HTMLInputElemen
 // @ts-ignore
 const bInput: HTMLInputElement = document.getElementById("b") as HTMLInputElement;
 // @ts-ignore
-const initApproxInput: HTMLInputElement = document.getElementById("init-approx") as HTMLInputElement;
+// const initApproxInput: HTMLInputElement = document.getElementById("init-approx") as HTMLInputElement;
 // @ts-ignore
 const accuracyInput: HTMLInputElement = document.getElementById("accuracy") as HTMLInputElement;
 
@@ -40,7 +40,7 @@ const messageContent: HTMLDivElement = document.getElementById("message-content"
 const table: HTMLDivElement = document.getElementById("table-full") as HTMLDivElement;
 const tableBlock: HTMLDivElement = document.getElementById("table-block") as HTMLDivElement;
 
-const initApproxGroupBlock: HTMLDivElement = document.getElementById("init-approx-group") as HTMLDivElement;
+// const initApproxGroupBlock: HTMLDivElement = document.getElementById("init-approx-group") as HTMLDivElement;
 
 const containerBlock: HTMLDivElement = document.getElementById("container") as HTMLDivElement;
 
@@ -58,9 +58,9 @@ const plot: HTMLDivElement = document.getElementById('plot') as HTMLDivElement;
 let xPlotValues: Array<number>;
 let yPlotValues: Array<number>;
 
-newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
-chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
-simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
+// newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
+// chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
+// simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
 
 
 functionSelect.addEventListener("change", (e) => {
@@ -134,7 +134,7 @@ form.addEventListener("submit", (event) => {
     const b: number = parseFloat(formData.get("b"));
 
     // @ts-ignore
-    const initApprox: number | null = parseFloat(formData.get("init-approx"));
+    // const initApprox: number | null = parseFloat(formData.get("init-approx"));
 
     // @ts-ignore
     const accuracy: number = parseFloat(formData.get("accuracy"));
@@ -157,8 +157,7 @@ form.addEventListener("submit", (event) => {
             break;
         }
         default: {
-            return;
-            // funcCont = firstFuncCont;
+            throw Error(`Function name '${func}' not supported.`);
             break;
         }
     }
@@ -198,11 +197,7 @@ form.addEventListener("submit", (event) => {
     let resultTable: MethodResultTable;
 
     try {
-        if ( ! (method instanceof ChordsMethod) ) {
-            resultTable = method.calculate(new MethodInputWithInitApprox(a, b, initApprox, accuracy), funcCont)
-        } else {
-            resultTable = method.calculate(new MethodInput(a, b, accuracy), funcCont)
-        }
+        resultTable = method.calculate(new MethodInput(a, b, accuracy), funcCont)
 
         const decPlacesNumber: number = accuracy.toString().length - 2;
         // console.log(tableHeading);
@@ -221,7 +216,7 @@ form.addEventListener("submit", (event) => {
 
         let shift: number = Math.abs(b - a) / 4;
 
-        for (let i = a - shift; i < b + shift; i+=0.001) {
+        for ( let i = a - shift; i < b + shift; i += 0.001 ) {
             xPlotValues.push(i);
             yPlotValues.push(funcCont.calc(i))
         }
@@ -392,7 +387,7 @@ function getDataFromFile() {
         let result = (reader.result as string).split(" ");
         // console.log("result splitted = ", result)
 
-        if (result.length < 3 || result.length > 4) {
+        if (result.length != 3) {
             showMessage("File contains Invalid number of parameters.");
             // fadeOutElement(messageBlock, 8);
 
@@ -411,12 +406,6 @@ function getDataFromFile() {
             bInput.value = parseFloat(result[1]).toString(); // js wtf parseFloat('0.01asdasd') = '0.01'
             accuracyInput.value = parseFloat(result[2]).toString();
 
-            if ( result.length == 4) {
-                initApproxInput.value = parseFloat(result[2]).toString();
-                accuracyInput.value = parseFloat(result[3]).toString();
-
-                newtonRadio.click();
-            }
         }
     }
 

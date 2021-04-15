@@ -10,7 +10,6 @@ const ChordsMethod_1 = require("./core/methods/ChordsMethod");
 const NewtonMethod_1 = require("./core/methods/NewtonMethod");
 const SimpleIterationsMethod_1 = require("./core/methods/SimpleIterationsMethod");
 const MethodInput_1 = require("./core/inputs/MethodInput");
-const MethodInputWithInitApprox_1 = require("./core/inputs/MethodInputWithInitApprox");
 const MethodResultTableRenderer_1 = require("./ui/renderers/MethodResultTableRenderer");
 const tablesheadings_config_1 = __importDefault(require("./ui/renderers/tablesheadings.config"));
 console.log("build.js mounted");
@@ -21,7 +20,7 @@ const aInput = document.getElementById("a");
 // @ts-ignore
 const bInput = document.getElementById("b");
 // @ts-ignore
-const initApproxInput = document.getElementById("init-approx");
+// const initApproxInput: HTMLInputElement = document.getElementById("init-approx") as HTMLInputElement;
 // @ts-ignore
 const accuracyInput = document.getElementById("accuracy");
 // @ts-ignore
@@ -34,7 +33,7 @@ const messageBlock = document.getElementById("message-block");
 const messageContent = document.getElementById("message-content");
 const table = document.getElementById("table-full");
 const tableBlock = document.getElementById("table-block");
-const initApproxGroupBlock = document.getElementById("init-approx-group");
+// const initApproxGroupBlock: HTMLDivElement = document.getElementById("init-approx-group") as HTMLDivElement;
 const containerBlock = document.getElementById("container");
 // @ts-ignore
 const fileInput = document.getElementById("file");
@@ -44,9 +43,9 @@ const mainTableIterNumber = document.getElementById("table-main-iterations-numbe
 const plot = document.getElementById('plot');
 let xPlotValues;
 let yPlotValues;
-newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
-chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
-simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
+// newtonRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
+// chordsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, false));
+// simpleIterationsRadio.addEventListener("click", () => displayInput(initApproxGroupBlock, true));
 functionSelect.addEventListener("change", (e) => {
     let funcCont;
     xPlotValues = [];
@@ -98,7 +97,7 @@ form.addEventListener("submit", (event) => {
     // @ts-ignore
     const b = parseFloat(formData.get("b"));
     // @ts-ignore
-    const initApprox = parseFloat(formData.get("init-approx"));
+    // const initApprox: number | null = parseFloat(formData.get("init-approx"));
     // @ts-ignore
     const accuracy = parseFloat(formData.get("accuracy"));
     let tableHeading;
@@ -117,8 +116,7 @@ form.addEventListener("submit", (event) => {
             break;
         }
         default: {
-            return;
-            // funcCont = firstFuncCont;
+            throw Error(`Function name '${func}' not supported.`);
             break;
         }
     }
@@ -151,12 +149,7 @@ form.addEventListener("submit", (event) => {
     // console.log("FuncCon:", funcCont.getFunctionRepresentation(), "Methd:", method);
     let resultTable;
     try {
-        if (!(method instanceof ChordsMethod_1.ChordsMethod)) {
-            resultTable = method.calculate(new MethodInputWithInitApprox_1.MethodInputWithInitApprox(a, b, initApprox, accuracy), funcCont);
-        }
-        else {
-            resultTable = method.calculate(new MethodInput_1.MethodInput(a, b, accuracy), funcCont);
-        }
+        resultTable = method.calculate(new MethodInput_1.MethodInput(a, b, accuracy), funcCont);
         const decPlacesNumber = accuracy.toString().length - 2;
         // console.log(tableHeading);
         // console.log(MethodResultTableRenderer.render(resultTable, decPlacesNumber, tableHeading))
@@ -307,7 +300,7 @@ function getDataFromFile() {
     reader.onload = () => {
         let result = reader.result.split(" ");
         // console.log("result splitted = ", result)
-        if (result.length < 3 || result.length > 4) {
+        if (result.length != 3) {
             showMessage("File contains Invalid number of parameters.");
             // fadeOutElement(messageBlock, 8);
         }
@@ -324,11 +317,6 @@ function getDataFromFile() {
             aInput.value = parseFloat(result[0]).toString(); // is because isNumeric( '0.01asdasd' ) retutn 'true'
             bInput.value = parseFloat(result[1]).toString(); // js wtf parseFloat('0.01asdasd') = '0.01'
             accuracyInput.value = parseFloat(result[2]).toString();
-            if (result.length == 4) {
-                initApproxInput.value = parseFloat(result[2]).toString();
-                accuracyInput.value = parseFloat(result[3]).toString();
-                newtonRadio.click();
-            }
         }
     };
     reader.onerror = () => {

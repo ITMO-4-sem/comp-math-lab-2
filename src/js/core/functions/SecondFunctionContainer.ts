@@ -30,8 +30,15 @@ export class SecondFunctionContainer implements FunctionContainer {
     }
 
     calcFI(x: number): number {
+
         return 12/11 * x - 1/11 * Math.pow(x, 3) - 4/11;
     }
+
+    // calcFI(x: number, alpha: number): number {
+    //     return (
+    //         x + alpha * this.calc(x)
+    //     )
+    // }
 
 
 }

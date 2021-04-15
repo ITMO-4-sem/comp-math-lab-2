@@ -33,6 +33,12 @@ export class ThirdFunctionContainer implements FunctionContainer {
         );
     }
 
+    // calcFI(x: number, alpha: number): number {
+    //     return (
+    //         x + alpha * this.calc(x)
+    //     )
+    // }
+
 
 
 

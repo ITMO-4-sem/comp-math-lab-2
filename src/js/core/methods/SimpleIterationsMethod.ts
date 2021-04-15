@@ -8,12 +8,13 @@ import {FunctionInputValidator} from "../validators/FunctionInputValidator";
 import {NewtonMethodResultTable} from "../results/NewtonMethodResultTable";
 import {NewtonMethodResultTableRow} from "../results/NewtonMethodResultTableRow";
 import {SimpleIterationsMethodResultTableRow} from "../results/SimpleIterationsMethodResultTableRow";
+import config from "./method.config.js";
 
 /**
  * Метод простых итераций.
  */
 export class SimpleIterationsMethod extends Method {
-    calculate(input: MethodInputWithInitApprox, fc: FunctionContainer): SimpleIterationsMethodResultTable {
+    calculate(input: MethodInput, fc: FunctionContainer): SimpleIterationsMethodResultTable {
         let inputValidationResult: ValidationResult = FunctionInputValidator.validate(input, fc);
 
         if ( inputValidationResult.isFailure() ) {
@@ -25,7 +26,7 @@ export class SimpleIterationsMethod extends Method {
         let epsilon: number = input.getAccuracy();
 
         let xnPrev: number;
-        let xn: number = input.getInitApprox();
+        let xn: number = input.getA(); // weak moment may be here
         let fiXn: number;
         let fXn: number;
         let fiXnPrev: number;
@@ -33,6 +34,13 @@ export class SimpleIterationsMethod extends Method {
         let diffAbs: number | null = null; // By default there were no 'previous x'.
 
         let iterationNumber: number = -1;
+
+        const step: number = config.step;
+
+        let h: number = fc.calcFirstDerivative(input.getA()); // alpha for 'Fi' function
+        let tmp: number;
+
+
 
         do {
             iterationNumber++;

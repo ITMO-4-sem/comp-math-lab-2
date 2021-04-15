@@ -16,7 +16,8 @@ class FunctionInputValidator {
     }
     static hasUniqueRoot(input, fc) {
         if (fc.calc(input.getA()) * fc.calc(input.getB()) > 0) // The function values on the end of isolation interval are of the same sign.
-            return new ValidationResult_1.ValidationResult(ValidationResultStatus_1.ValidationResultStatus.FAIL, "The specified isolation interval has 0 or even number of roots. The root must be unique.");
+            // "The specified isolation interval has 0 or even number of roots. The root must be unique."
+            return new ValidationResult_1.ValidationResult(ValidationResultStatus_1.ValidationResultStatus.FAIL, "Указанный интервал содержит ноль или четное число корней. Корень должен быть единственным.");
         let rootsNumberCounter = 0;
         let step = (input.getB() - input.getA()) / validator_config_1.default.divisionsNumber;
         let prevSign = this.getSign(fc.calc(input.getA()));
@@ -32,7 +33,8 @@ class FunctionInputValidator {
             rootsNumberCounter++;
         }
         if (rootsNumberCounter != 1) {
-            return new ValidationResult_1.ValidationResult(ValidationResultStatus_1.ValidationResultStatus.FAIL, "The specified isolation interval has more than one root. The root must be unique.");
+            // "The specified isolation interval has more than one root. The root must be unique."
+            return new ValidationResult_1.ValidationResult(ValidationResultStatus_1.ValidationResultStatus.FAIL, "Указанный интервал изоляции содержит больше одного корня. Корень должен быть единственным.");
         }
         return new ValidationResult_1.ValidationResult(ValidationResultStatus_1.ValidationResultStatus.OK);
     }

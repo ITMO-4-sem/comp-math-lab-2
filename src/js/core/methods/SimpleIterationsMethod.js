@@ -1,10 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SimpleIterationsMethod = void 0;
 const Method_1 = require("./Method");
 const SimpleIterationsMethodResultTable_1 = require("../results/SimpleIterationsMethodResultTable");
 const FunctionInputValidator_1 = require("../validators/FunctionInputValidator");
 const SimpleIterationsMethodResultTableRow_1 = require("../results/SimpleIterationsMethodResultTableRow");
+const method_config_js_1 = __importDefault(require("./method.config.js"));
 /**
  * Метод простых итераций.
  */
@@ -17,12 +21,15 @@ class SimpleIterationsMethod extends Method_1.Method {
         let resultTable = new SimpleIterationsMethodResultTable_1.SimpleIterationsMethodResultTable();
         let epsilon = input.getAccuracy();
         let xnPrev;
-        let xn = input.getInitApprox();
+        let xn = input.getA(); // weak moment may be here
         let fiXn;
         let fXn;
         let fiXnPrev;
         let diffAbs = null; // By default there were no 'previous x'.
         let iterationNumber = -1;
+        const step = method_config_js_1.default.step;
+        let h = fc.calcFirstDerivative(input.getA()); // alpha for 'Fi' function
+        let tmp;
         do {
             iterationNumber++;
             xnPrev = xn; // Saves the previous 'xn' value
